@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center; 
+}
+
+td, th {
+	color: black;
+     border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+	font-family: "Times New Roman", Times, serif;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+	
+}
+tr:nth-child(odd) {
+	background-color: #A9A9A9;
+}
+::selection {
+    color: red;
+    background: yellow;
+}
+
+::selection {
+    color: red;
+    background: yellow;
+}
+tr:hover {background-color:	#339933;}
+
+h#modifi {
+    float: right;
+    margin-top: -417px;
+}
+</style>
+</head>
+<h1 style= "font-family: Times New Roman";>
+<p align="center"> <font color="white">LIST </h1>
+<body bgcolor="	#363a37">
+<body onload="createRow()">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="myTable" >
+<tr>
+<td><b>Index</td>
+<td><b>User</td>
+<td><b>Time</td>
+<td><b>Script</td>
+</tr>
+</table>
+<h id="modifi">Date<h>
+<br>
+<script>
+function createRow(){
+var txt='';
+var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function(){
+if(xmlhttp.status == 200 && xmlhttp.readyState == 4){
+txt = xmlhttp.responseText;
+console.log(txt);
+let index = 1;
+var lines=txt.split('\n');
+for(var line = 0;line < lines.length;line++)
+	{
+	var rows=lines[line].split('|');
+	console.log(rows.length);
+	if(rows.length>1){
+	var table=document.getElementById("myTable");
+	var row=table.insertRow(index);
+	var cell1=row.insertCell(0);
+	var cell2=row.insertCell(1);
+	var cell3=row.insertCell(2);
+	var cell4=row.insertCell(3);
+	cell1.innerHTML=rows[0];
+	cell2.innerHTML=rows[1];
+	cell3.innerHTML=rows[2];
+	cell4.innerHTML=rows[3];
+	index++;
+	}
+}
+document.getElementById("modifi").innerHTML=lines[lines.length-1];
+}
+};
+xmlhttp.open("GET","somewebhostlink/filename",true);
+xmlhttp.send();
+
+}
+
+
+
+</script> 
+</body>
+</html>
